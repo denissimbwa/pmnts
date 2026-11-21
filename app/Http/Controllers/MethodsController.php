@@ -129,7 +129,7 @@ curl_setopt_array($curl, array(
   CURLOPT_FOLLOWLOCATION => true,
   CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
   CURLOPT_CUSTOMREQUEST => 'POST',
-  CURLOPT_POSTFIELDS => array('numbers' => $to,'msg' => $content,'username' => config('api_config.sms_username_africa'),'passwd'=>config('api_config.sms_key_uganda') ),
+  CURLOPT_POSTFIELDS => array('numbers' => $to,'msg' => $content,'username' => config('api_config.sms_username_uganda'),'passwd'=>config('api_config.sms_key_uganda') ),
   CURLOPT_HTTPHEADER => array(
     'apiKey: '.config('api_config.sms_key_uganda').''
   ),

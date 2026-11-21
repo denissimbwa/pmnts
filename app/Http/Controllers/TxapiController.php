@@ -192,7 +192,7 @@ curl_close($curl);
 public static function relworx_receive(Request $rq){
     //prepair data that for update
     $post = $rq->input();
-
+    Log::channel('slackNotification')->info('TX Notification ONE', ['response_1'=>json_encode($rq->input()) ] );
     $response=json_encode($rq->input());
     $response=json_decode($response,true);
     $data=$response ?? null;
@@ -209,7 +209,7 @@ public static function relworx_receive(Request $rq){
 
     Log::channel('slackNotification')->info('Finishing TX', ['response_body'=>$response,'tx_Detail'=>$tx_detail] );
     
-    $amount_cash=($tx_detail->tx_type==="deposit") ? $tx_detail->ref_amount : $tx_detail->ref_amount*-1;
+    $amount_cash=($tx_detail->tx_type==="deposit") ? $tx_detail->ref_amount*1+$tx_detail->tx_cash_back*1 : ($tx_detail->ref_amount*1 + $tx_detail->tx_cash_back*1)*-1;
     $amount_cash=($response['status']== true || $response['status']==="success") ? $amount_cash : 0;
     $status=($response['status']== "success" || $response['success']==="success") ? "success" : "failed";
 
